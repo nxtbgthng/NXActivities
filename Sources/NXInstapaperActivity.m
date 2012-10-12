@@ -7,10 +7,20 @@
 //
 
 #import <Security/Security.h>
+
+#import "NSBundle+NXActivities.h"
+#import "NXInstapaperLoginViewController.h"
+
 #import "NXInstapaperActivity.h"
 
 NSString * const NXInstapaperAccountUsernameDefaultsKey = @"NXInstapaperAccountUsername";
 NSString * const NXInstapaperKeychainServiceIdentifier = @"NXInstapaperKeychainServiceIdentifier";
+
+@interface NXInstapaperActivity ()
+
+@property (nonatomic, strong, readwrite) NSArray *activityItems;
+
+@end
 
 
 @implementation NXInstapaperActivity
@@ -114,11 +124,24 @@ NSString * const NXInstapaperKeychainServiceIdentifier = @"NXInstapaperKeychainS
 
 - (UIImage *)activityImage;
 {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        return [UIImage imageNamed:@"Instapaper-iPad.png"];
-    } else {
-        return [UIImage imageNamed:@"Instapaper-iPhone.png"];
+    NSBundle *bundle  = [NSBundle nxactivitiesBundle];
+    
+    NSString *resoutionMultiplier = @"";
+    if ([[UIScreen mainScreen] scale] == 2.0) {
+        resoutionMultiplier = @"@2x";
     }
+    
+    NSString *imageName;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        imageName = [NSString stringWithFormat:@"InstapaperActivity-ipad%@", resoutionMultiplier];
+    } else {
+        imageName = [NSString stringWithFormat:@"InstapaperActivity-iphone%@", resoutionMultiplier];
+    }
+
+    NSString *path = [bundle pathForResource:imageName ofType:@"png"];
+
+    return [UIImage imageWithContentsOfFile:path];
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems;
@@ -132,6 +155,65 @@ NSString * const NXInstapaperKeychainServiceIdentifier = @"NXInstapaperKeychainS
     }
     
     return canPerform;
+}
+
+- (void)prepareWithActivityItems:(NSArray *)activityItems;
+{
+    self.activityItems = activityItems;
+}
+
+- (UIViewController * )activityViewController;
+{
+    NXInstapaperLoginViewController *loginController  = [[NXInstapaperLoginViewController alloc] initWithResultHandler:^(NXInstapaperLoginViewController *controller, BOOL success) {
+        if (success) {
+            [self performActivity];
+        } else {
+            [self activityDidFinish:NO];
+        }
+    }];
+    return [[UINavigationController alloc] initWithRootViewController:loginController];
+}
+
+- (void)performActivity;
+{
+    NSString *username = [[self class] username];
+    NSString *password = [[self class] password];
+    
+    if (username) {
+        for (NSURL *shareURL in self.activityItems) {
+            NSString *urlString = [NSString stringWithFormat:@"https://www.instapaper.com/api/add?username=%@&password=%@&url=%@",
+                                   [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                   [password stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                   [shareURL.absoluteString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+            
+            [NSURLConnection sendAsynchronousRequest:request
+                                               queue:[NSOperationQueue mainQueue]
+                                   completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                       BOOL success = NO;
+                                       
+                                       [self activityDidFinish:success withItem:shareURL];
+                                   }];
+        }
+        
+    
+    } else {
+        [self activityDidFinish:NO];
+    }
+}
+
+- (void)activityDidFinish:(BOOL)completed withItem:(id)item;
+{
+    @synchronized(self.activityItems) {
+        NSMutableArray *items = [self.activityItems mutableCopy];
+        [items removeObject:item];
+        self.activityItems = [items copy];
+    }
+    
+    if (self.activityItems.count == 0) {
+        [self activityDidFinish:completed];
+    }
 }
 
 @end

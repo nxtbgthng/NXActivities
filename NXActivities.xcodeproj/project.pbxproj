@@ -17,6 +17,9 @@
 		9907A4C316281407008AC656 /* NXInstapaperActivityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9907A4C216281407008AC656 /* NXInstapaperActivityTest.m */; };
 		9907A4C6162819C4008AC656 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9907A4C5162819C4008AC656 /* Security.framework */; };
 		9907A4C716281F50008AC656 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9907A4C5162819C4008AC656 /* Security.framework */; };
+		9981D08316284A26005DE8C9 /* NSBundle+NXActivities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9981D08216284A26005DE8C9 /* NSBundle+NXActivities.m */; };
+		9981D08716284BF0005DE8C9 /* NXInstapaperLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9981D08616284BF0005DE8C9 /* NXInstapaperLoginViewController.m */; };
+		9981D08A16284D01005DE8C9 /* NXTextInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9981D08916284D01005DE8C9 /* NXTextInputCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,12 @@
 		9907A4C216281407008AC656 /* NXInstapaperActivityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXInstapaperActivityTest.m; sourceTree = "<group>"; };
 		9907A4C4162814DB008AC656 /* NXActivities.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NXActivities.bundle; sourceTree = "<group>"; };
 		9907A4C5162819C4008AC656 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		9981D08116284A26005DE8C9 /* NSBundle+NXActivities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+NXActivities.h"; sourceTree = "<group>"; };
+		9981D08216284A26005DE8C9 /* NSBundle+NXActivities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+NXActivities.m"; sourceTree = "<group>"; };
+		9981D08516284BF0005DE8C9 /* NXInstapaperLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXInstapaperLoginViewController.h; sourceTree = "<group>"; };
+		9981D08616284BF0005DE8C9 /* NXInstapaperLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXInstapaperLoginViewController.m; sourceTree = "<group>"; };
+		9981D08816284D01005DE8C9 /* NXTextInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXTextInputCell.h; sourceTree = "<group>"; };
+		9981D08916284D01005DE8C9 /* NXTextInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXTextInputCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +129,12 @@
 				9907A49416281338008AC656 /* Supporting Files */,
 				9907A4BE162813CC008AC656 /* NXInstapaperActivity.h */,
 				9907A4BF162813CC008AC656 /* NXInstapaperActivity.m */,
+				9981D08516284BF0005DE8C9 /* NXInstapaperLoginViewController.h */,
+				9981D08616284BF0005DE8C9 /* NXInstapaperLoginViewController.m */,
+				9981D08116284A26005DE8C9 /* NSBundle+NXActivities.h */,
+				9981D08216284A26005DE8C9 /* NSBundle+NXActivities.m */,
+				9981D08816284D01005DE8C9 /* NXTextInputCell.h */,
+				9981D08916284D01005DE8C9 /* NXTextInputCell.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -258,6 +273,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9907A4C0162813CC008AC656 /* NXInstapaperActivity.m in Sources */,
+				9981D08316284A26005DE8C9 /* NSBundle+NXActivities.m in Sources */,
+				9981D08716284BF0005DE8C9 /* NXInstapaperLoginViewController.m in Sources */,
+				9981D08A16284D01005DE8C9 /* NXTextInputCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
