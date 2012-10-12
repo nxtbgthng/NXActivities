@@ -141,30 +141,32 @@ NSString * const NXInstapaperLoginViewControllerInputCellIdentifier = @"InputCel
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
         
-        [NSURLConnection sendAsynchronousRequest:request
-                                           queue:[NSOperationQueue mainQueue]
-                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                                   if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-                                       NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                                       if (httpResponse.statusCode == 200) {
-                                           
-                                           [NXInstapaperActivity storeAccountWithUsername:self.usernameField.text
-                                                                                 password:self.passwordField.text];
-                                           
-                                           if (_handler) _handler(self, YES);
-                                           
-                                           return;
-                                       } else {
-                                           NSLog(@"Instapaper Login failed with HTTP Status %d", httpResponse.statusCode);
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [NSURLConnection sendAsynchronousRequest:request
+                                               queue:[NSOperationQueue mainQueue]
+                                   completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                       if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                                           NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                           if (httpResponse.statusCode == 200) {
+                                               
+                                               [NXInstapaperActivity storeAccountWithUsername:self.usernameField.text
+                                                                                     password:self.passwordField.text];
+                                               
+                                               if (_handler) _handler(self, YES);
+                                               
+                                               return;
+                                           } else {
+                                               NSLog(@"Instapaper Login failed with HTTP Status %d", httpResponse.statusCode);
+                                           }
                                        }
-                                   }
-
-                                   NSLog(@"Instapaper Login failed with error %@", error);
-                                   
-                                   [NXInstapaperActivity removeAccount];
-                                   
-                                   if (_handler) _handler(self, NO);
-                               }];
+                                       
+                                       NSLog(@"Instapaper Login failed with error %@", error);
+                                       
+                                       [NXInstapaperActivity removeAccount];
+                                       
+                                       if (_handler) _handler(self, NO);
+                                   }];
+        }];
     }
 }
 
