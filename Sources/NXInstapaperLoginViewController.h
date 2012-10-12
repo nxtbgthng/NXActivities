@@ -19,5 +19,6 @@ typedef void(^NXInstapaperLoginViewControllerResultHandler)(NXInstapaperLoginVie
 @property (nonatomic, copy) NXInstapaperLoginViewControllerResultHandler handler;
 
 - (IBAction)login:(id)sender;
+- (IBAction)cancel:(id)sender;
 
 @end

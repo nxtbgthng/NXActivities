@@ -30,7 +30,7 @@
 {
     [super layoutSubviews];
     
-    self.inputField.frame = CGRectInset(self.contentView.bounds, 2, 2);
+    self.inputField.frame = CGRectInset(self.contentView.bounds, 6, 10);
 }
 
 @end

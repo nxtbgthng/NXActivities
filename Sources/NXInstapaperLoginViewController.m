@@ -7,6 +7,7 @@
 //
 
 #import "NXTextInputCell.h"
+#import "NXInstapaperActivity.h"
 
 #import "NXInstapaperLoginViewController.h"
 
@@ -39,11 +40,14 @@ NSString * const NXInstapaperLoginViewControllerInputCellIdentifier = @"InputCel
     [self.tableView registerClass:[NXTextInputCell class]
            forCellReuseIdentifier:NXInstapaperLoginViewControllerInputCellIdentifier];
     
-    self.navigationItem.title = @"Login";
+    self.navigationItem.title = @"Instapaper";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login"
                                                                               style:UIBarButtonItemStyleDone
                                                                              target:self
-                                                                             action:@selector(login)];
+                                                                             action:@selector(login:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                          target:self
+                                                                                          action:@selector(cancel:)];
 }
 
 #pragma mark Accessibility
@@ -86,10 +90,12 @@ NSString * const NXInstapaperLoginViewControllerInputCellIdentifier = @"InputCel
         cell.inputField.placeholder = @"Username";
         cell.inputField.secureTextEntry = NO;
         cell.inputField.returnKeyType = UIReturnKeyNext;
+        cell.inputField.enablesReturnKeyAutomatically = YES;
     } else {
         cell.inputField.placeholder = @"Password";
         cell.inputField.secureTextEntry = YES;
         cell.inputField.returnKeyType = UIReturnKeyDone;
+        cell.inputField.enablesReturnKeyAutomatically = YES;
     }
     
     return cell;
@@ -109,14 +115,73 @@ NSString * const NXInstapaperLoginViewControllerInputCellIdentifier = @"InputCel
     return NO;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField;
+{
+    [self updateUI];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
+{
+    [self updateUI];
+    
+    return YES;
+}
+
+
 #pragma mark Actions
 
 - (void)login:(id)sender;
 {
-    NSLog(@"login with %@ pass %@", self.usernameField.text, self.passwordField.text);
+    if ([self fieldsValid]) {
+        NSLog(@"login with %@ pass %@", self.usernameField.text, self.passwordField.text);
+     
+        NSString *urlString = [NSString stringWithFormat:@"https://www.instapaper.com/api/authenticate?username=%@&password=%@",
+                               [self.usernameField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                               [self.passwordField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+        
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                   if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                                       NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                       if (httpResponse.statusCode == 200) {
+                                           
+                                           [NXInstapaperActivity storeAccountWithUsername:self.usernameField.text
+                                                                                 password:self.passwordField.text];
+                                           
+                                           if (_handler) _handler(self, YES);
+                                           
+                                           return;
+                                       } else {
+                                           NSLog(@"Instapaper Login failed with HTTP Status %d", httpResponse.statusCode);
+                                       }
+                                   }
+
+                                   NSLog(@"Instapaper Login failed with error %@", error);
+                                   
+                                   [NXInstapaperActivity removeAccount];
+                                   
+                                   if (_handler) _handler(self, NO);
+                               }];
+    }
 }
 
+- (IBAction)cancel:(id)sender;
+{
+    if (_handler) _handler(self, NO);
+}
 
+- (void)updateUI;
+{
+    self.navigationItem.rightBarButtonItem.enabled = [self fieldsValid];
+}
+
+- (BOOL)fieldsValid;
+{
+    return [self.usernameField.text isEqual:@""] == NO && [self.passwordField.text isEqual:@""] == NO;
+}
 
 
 @end
