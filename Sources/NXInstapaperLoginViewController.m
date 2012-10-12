@@ -50,6 +50,14 @@ NSString * const NXInstapaperLoginViewControllerInputCellIdentifier = @"InputCel
                                                                                           action:@selector(cancel:)];
 }
 
+- (void)viewDidAppear:(BOOL)animated;
+{
+    [super viewDidAppear:animated];
+    
+    self.usernameField.text = [NXInstapaperActivity username];
+    [self.usernameField becomeFirstResponder];
+}
+
 #pragma mark Accessibility
 
 - (UITextField *)usernameField;

@@ -164,6 +164,10 @@ NSString * const NXInstapaperKeychainServiceIdentifier = @"NXInstapaperKeychainS
 
 - (UIViewController * )activityViewController;
 {
+    if ([[self class] username]) {
+        return nil;
+    }
+    
     NXInstapaperLoginViewController *loginController  = [[NXInstapaperLoginViewController alloc] initWithResultHandler:^(NXInstapaperLoginViewController *controller, BOOL success) {
         if (success) {
             [self performActivity];
@@ -188,13 +192,16 @@ NSString * const NXInstapaperKeychainServiceIdentifier = @"NXInstapaperKeychainS
             
             NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
             
-            [NSURLConnection sendAsynchronousRequest:request
-                                               queue:[NSOperationQueue mainQueue]
-                                   completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                                       BOOL success = NO;
-                                       
-                                       [self activityDidFinish:success withItem:shareURL];
-                                   }];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [NSURLConnection sendAsynchronousRequest:request
+                                                   queue:[NSOperationQueue mainQueue]
+                                       completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                           BOOL success = NO;
+                                           
+                                           [self activityDidFinish:success withItem:shareURL];
+                                       }];
+            }];
+            
         }
         
     
