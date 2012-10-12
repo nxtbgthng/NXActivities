@@ -23,6 +23,7 @@
 		9907A50116282AB9008AC656 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9907A4DC16282AB9008AC656 /* Foundation.framework */; };
 		9907A50916282AB9008AC656 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9907A50716282AB9008AC656 /* InfoPlist.strings */; };
 		9907A50C16282AB9008AC656 /* NXActivitiesDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9907A50B16282AB9008AC656 /* NXActivitiesDemoTests.m */; };
+		991397C416287EC10031116B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 991397C316287EC10031116B /* QuartzCore.framework */; };
 		9981D02F16282D7E005DE8C9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9981D02E16282D7E005DE8C9 /* Social.framework */; };
 		9981D03C16282E5A005DE8C9 /* libNXActivities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9981D03B16282E5A005DE8C9 /* libNXActivities.a */; };
 		9981D03F16282F21005DE8C9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9981D03E16282F21005DE8C9 /* Security.framework */; };
@@ -62,10 +63,11 @@
 		9907A50816282AB9008AC656 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9907A50A16282AB9008AC656 /* NXActivitiesDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXActivitiesDemoTests.h; sourceTree = "<group>"; };
 		9907A50B16282AB9008AC656 /* NXActivitiesDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXActivitiesDemoTests.m; sourceTree = "<group>"; };
+		991397C316287EC10031116B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9981D02E16282D7E005DE8C9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		9981D03B16282E5A005DE8C9 /* libNXActivities.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libNXActivities.a; path = "../../build/Release-iphoneos/libNXActivities.a"; sourceTree = "<group>"; };
+		9981D03B16282E5A005DE8C9 /* libNXActivities.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNXActivities.a; path = "../../build/Release-iphoneos/libNXActivities.a"; sourceTree = "<group>"; };
 		9981D03E16282F21005DE8C9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		9981D041162848E1005DE8C9 /* NXActivities.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = NXActivities.bundle; path = ../../Resources/NXActivities.bundle; sourceTree = "<group>"; };
+		9981D041162848E1005DE8C9 /* NXActivities.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = NXActivities.bundle; path = ../../Resources/NXActivities.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				991397C416287EC10031116B /* QuartzCore.framework in Frameworks */,
 				9981D03F16282F21005DE8C9 /* Security.framework in Frameworks */,
 				9981D03C16282E5A005DE8C9 /* libNXActivities.a in Frameworks */,
 				9981D02F16282D7E005DE8C9 /* Social.framework in Frameworks */,
@@ -118,6 +121,7 @@
 		9907A4D916282AB9008AC656 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				991397C316287EC10031116B /* QuartzCore.framework */,
 				9981D03B16282E5A005DE8C9 /* libNXActivities.a */,
 				9981D03E16282F21005DE8C9 /* Security.framework */,
 				9981D02E16282D7E005DE8C9 /* Social.framework */,
