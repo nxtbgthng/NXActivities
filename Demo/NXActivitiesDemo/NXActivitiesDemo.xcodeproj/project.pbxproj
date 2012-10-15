@@ -378,6 +378,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
+					"$(inherited)",
 				);
 				SDKROOT = iphoneos;
 			};
@@ -404,6 +405,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
+					"$(inherited)",
 				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

@@ -11,6 +11,7 @@
 
 #import "NSBundle+NXActivities.h"
 #import "NXInstapaperLoginViewController.h"
+#import "MBProgressHUD.h"
 
 #import "NXInstapaperActivity.h"
 
@@ -184,7 +185,10 @@ NSString * const NXInstapaperKeychainServiceIdentifier = @"NXInstapaperKeychainS
     NSString *username = [[self class] username];
     NSString *password = [[self class] password];
     
-    [self showProgressView];
+    UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:mainWindow animated:YES];
+    hud.labelText = @"Saving…";
     
     if (username) {
         for (NSURL *shareURL in self.activityItems) {
@@ -222,33 +226,21 @@ NSString * const NXInstapaperKeychainServiceIdentifier = @"NXInstapaperKeychainS
     }
     
     if (self.activityItems.count == 0) {
+        int64_t delayInSeconds = 0.3;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+            [MBProgressHUD hideAllHUDsForView:mainWindow animated:YES];
+        });
+        
+        
         [self activityDidFinish:completed];
     }
 }
 
 - (void)showProgressView;
 {
-    UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-    
-    UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectZero];
-    wrapperView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.5];
-    wrapperView.layer.cornerRadius = 8;
-    
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [wrapperView addSubview:spinner];
-    [spinner startAnimating];
-    CGRect wrapperFrame = CGRectInset(spinner.frame, -6, -6);
-    wrapperFrame.origin.x = CGRectGetMidX(mainWindow.frame) - .5 * CGRectGetWidth(wrapperFrame);
-    wrapperFrame.origin.y = CGRectGetMidY(mainWindow.frame) - .5 * CGRectGetHeight(wrapperFrame);
-    wrapperView.frame = wrapperFrame;
-    
-    CGRect spinnerFrame = spinner.frame;
-    spinnerFrame.origin = wrapperFrame.origin;
-    spinnerFrame.origin.x = 6;
-    spinnerFrame.origin.y = 6;
-    spinner.frame = spinnerFrame;
-    
-    [mainWindow addSubview:wrapperView];
+
 }
     
 

@@ -5,6 +5,9 @@
       location = "group:Demo/NXActivitiesDemo/NXActivitiesDemo.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:NXActivities.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:NXActivities.xcodeproj">
    </FileRef>
 </Workspace>
