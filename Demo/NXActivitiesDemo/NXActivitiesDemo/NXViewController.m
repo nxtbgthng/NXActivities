@@ -7,6 +7,8 @@
 //
 
 #import "NXInstapaperActivity.h"
+#import "NXPocketActivity.h"
+
 #import "NXViewController.h"
 
 @interface NXViewController ()
@@ -18,23 +20,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+#error Insert your Pocket API Key here and remove this directive
+    [NXPocketActivity setPocketAPIKey:nil];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewDidAppear:(BOOL)animated;
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super viewDidAppear:animated];
+    
+    [self updateButtons];
 }
 
 - (IBAction)share:(id)sender;
 {
     NXInstapaperActivity *instapaperActivity = [[NXInstapaperActivity alloc] init];
+    NXPocketActivity *pocketActivity = [[NXPocketActivity alloc] init];
+    
     NSURL *url = [NSURL URLWithString:self.URLField.text];
     if (url) {
         UIActivityViewController *shareController = [[UIActivityViewController alloc] initWithActivityItems:@[ url ]
-                                                                                      applicationActivities:@[ instapaperActivity ]];
+                                                                                      applicationActivities:@[ instapaperActivity, pocketActivity ]];
         [self presentViewController:shareController animated:YES completion:NULL];
+        shareController.completionHandler = ^(NSString *type, BOOL completed) {
+            [self updateButtons];
+        };
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Invalid URL"
                                    message:[NSString stringWithFormat:@"%@ is not an URL", self.URLField.text]
@@ -43,4 +53,23 @@
                          otherButtonTitles: nil] show];
     }
 }
+
+- (IBAction)logOutOfInstapaper:(id)sender;
+{
+    [NXInstapaperActivity removeAccount];
+    [self updateButtons];    
+}
+
+- (IBAction)logOutOfPocket:(id)sender;
+{
+    [NXPocketActivity removeAccount];
+    [self updateButtons];
+}
+
+- (void)updateButtons;
+{
+    self.instapaperLogOutButton.enabled = [NXInstapaperActivity username] != nil;
+    self.pocketLogOutButton.enabled = [NXPocketActivity username] != nil;
+}
+
 @end

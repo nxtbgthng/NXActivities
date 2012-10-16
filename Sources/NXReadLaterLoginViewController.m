@@ -96,13 +96,17 @@ NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell
     cell.inputField.delegate = self;
     
     if (indexPath.row == 0) {
-        cell.inputField.placeholder = @"Username";
+        cell.inputField.placeholder = @"Email or Username";
         cell.inputField.secureTextEntry = NO;
+        cell.inputField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        cell.inputField.keyboardType = UIKeyboardTypeEmailAddress;
         cell.inputField.returnKeyType = UIReturnKeyNext;
         cell.inputField.enablesReturnKeyAutomatically = YES;
     } else {
         cell.inputField.placeholder = @"Password";
         cell.inputField.secureTextEntry = YES;
+        cell.inputField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        cell.inputField.keyboardType = UIKeyboardTypeDefault;
         cell.inputField.returnKeyType = UIReturnKeyDone;
         cell.inputField.enablesReturnKeyAutomatically = YES;
     }
@@ -144,6 +148,9 @@ NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell
     if ([self fieldsValid]) {
         NSLog(@"login with %@ pass %@", self.usernameField.text, self.passwordField.text);
      
+        [self.passwordField resignFirstResponder];
+        [self.usernameField resignFirstResponder];
+        
         NSURLRequest *request = [self.activity loginRequestWithUsername:self.usernameField.text password:self.passwordField.text];
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{

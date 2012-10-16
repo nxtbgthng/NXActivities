@@ -10,8 +10,13 @@
 
 @interface NXViewController : UIViewController
 
-- (IBAction)share:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *URLField;
+@property (weak, nonatomic) IBOutlet UIButton *instapaperLogOutButton;
+@property (weak, nonatomic) IBOutlet UIButton *pocketLogOutButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
+- (IBAction)share:(id)sender;
+- (IBAction)logOutOfInstapaper:(id)sender;
+- (IBAction)logOutOfPocket:(id)sender;
 
 @end

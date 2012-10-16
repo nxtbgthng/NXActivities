@@ -19,6 +19,10 @@
 		9907A4C6162819C4008AC656 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9907A4C5162819C4008AC656 /* Security.framework */; };
 		9907A4C716281F50008AC656 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9907A4C5162819C4008AC656 /* Security.framework */; };
 		990E9714162D5A45006F865E /* NXReadLaterActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 990E9713162D5A45006F865E /* NXReadLaterActivity.m */; };
+		99101B61162D901000420C38 /* NXPocketActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 99101B60162D901000420C38 /* NXPocketActivity.m */; };
+		99101B64162D9E4100420C38 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99101B63162D9E4100420C38 /* CoreGraphics.framework */; };
+		99101B65162D9E6600420C38 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99101B63162D9E4100420C38 /* CoreGraphics.framework */; };
+		99101B66162D9E6B00420C38 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 991397C016287EB20031116B /* QuartzCore.framework */; };
 		991397C116287EB20031116B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 991397C016287EB20031116B /* QuartzCore.framework */; };
 		9981D08316284A26005DE8C9 /* NSBundle+NXActivities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9981D08216284A26005DE8C9 /* NSBundle+NXActivities.m */; };
 		9981D08716284BF0005DE8C9 /* NXReadLaterLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9981D08616284BF0005DE8C9 /* NXReadLaterLoginViewController.m */; };
@@ -66,6 +70,9 @@
 		9907A4C5162819C4008AC656 /* Security.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		990E9712162D5A45006F865E /* NXReadLaterActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXReadLaterActivity.h; sourceTree = "<group>"; };
 		990E9713162D5A45006F865E /* NXReadLaterActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXReadLaterActivity.m; sourceTree = "<group>"; };
+		99101B5F162D901000420C38 /* NXPocketActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXPocketActivity.h; sourceTree = "<group>"; };
+		99101B60162D901000420C38 /* NXPocketActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXPocketActivity.m; sourceTree = "<group>"; };
+		99101B63162D9E4100420C38 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		991397C016287EB20031116B /* QuartzCore.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9981D08116284A26005DE8C9 /* NSBundle+NXActivities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+NXActivities.h"; sourceTree = "<group>"; };
 		9981D08216284A26005DE8C9 /* NSBundle+NXActivities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+NXActivities.m"; sourceTree = "<group>"; };
@@ -80,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99101B64162D9E4100420C38 /* CoreGraphics.framework in Frameworks */,
 				991397C116287EB20031116B /* QuartzCore.framework in Frameworks */,
 				9907A4C6162819C4008AC656 /* Security.framework in Frameworks */,
 				9907A49216281338008AC656 /* Foundation.framework in Frameworks */,
@@ -91,6 +99,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99101B66162D9E6B00420C38 /* QuartzCore.framework in Frameworks */,
+				99101B65162D9E6600420C38 /* CoreGraphics.framework in Frameworks */,
 				9907A4A116281338008AC656 /* SenTestingKit.framework in Frameworks */,
 				9907A4A316281338008AC656 /* UIKit.framework in Frameworks */,
 				9907A4A416281338008AC656 /* Foundation.framework in Frameworks */,
@@ -126,6 +136,7 @@
 		9907A49016281338008AC656 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				99101B63162D9E4100420C38 /* CoreGraphics.framework */,
 				991397C016287EB20031116B /* QuartzCore.framework */,
 				9907A4C5162819C4008AC656 /* Security.framework */,
 				9907A49116281338008AC656 /* Foundation.framework */,
@@ -142,6 +153,8 @@
 				9907A49416281338008AC656 /* Supporting Files */,
 				9907A4BE162813CC008AC656 /* NXInstapaperActivity.h */,
 				9907A4BF162813CC008AC656 /* NXInstapaperActivity.m */,
+				99101B5F162D901000420C38 /* NXPocketActivity.h */,
+				99101B60162D901000420C38 /* NXPocketActivity.m */,
 				990E9712162D5A45006F865E /* NXReadLaterActivity.h */,
 				990E9713162D5A45006F865E /* NXReadLaterActivity.m */,
 				9981D08516284BF0005DE8C9 /* NXReadLaterLoginViewController.h */,
@@ -307,6 +320,7 @@
 				9981D08716284BF0005DE8C9 /* NXReadLaterLoginViewController.m in Sources */,
 				9981D08A16284D01005DE8C9 /* NXTextInputCell.m in Sources */,
 				990E9714162D5A45006F865E /* NXReadLaterActivity.m in Sources */,
+				99101B61162D901000420C38 /* NXPocketActivity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

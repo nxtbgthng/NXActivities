@@ -40,22 +40,6 @@ NSString * const NXInstapaperServiceIdentifier = @"Instapaper";
     return @"Instapaper";
 }
 
-- (UIViewController * )activityViewController;
-{
-    if ([[self class] username]) {
-        return nil;
-    }
-    
-    NXReadLaterLoginViewController *loginController  = [[NXReadLaterLoginViewController alloc] initWithActivity:self resultHandler:^(NXReadLaterLoginViewController *controller, BOOL success) {
-        if (success) {
-            [self performActivity];
-        } else {
-            [self activityDidFinish:NO];
-        }
-    }];
-    return [[UINavigationController alloc] initWithRootViewController:loginController];
-}
-
 - (NSURLRequest *)readLaterRequest:(NSURL *)shareURL;
 {
     NSString *urlString = [NSString stringWithFormat:@"https://www.instapaper.com/api/add?username=%@&password=%@&url=%@",

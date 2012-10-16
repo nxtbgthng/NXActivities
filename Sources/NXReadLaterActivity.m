@@ -8,6 +8,7 @@
 
 #import "MBProgressHUD.h"
 
+#import "NXReadLaterLoginViewController.h"
 #import "NSBundle+NXActivities.h"
 
 #import "NXReadLaterActivity.h"
@@ -19,6 +20,7 @@
 + (BOOL)storeUsername:(NSString *)username password:(NSString *)password forServiceIdentifier:(NSString *)serviceIdentifier;
 + (BOOL)removeAccountForServiceIdentifier:(NSString *)serviceIdentifier;
 
+@property (nonatomic, strong, readwrite) MBProgressHUD *hud;
 @property (nonatomic, strong, readwrite) NSArray *activityItems;
 
 @end
@@ -119,10 +121,9 @@
     
     NSAssert1(result, @"error while deleting token from keychain: %ld", err);
     
-    if (result) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:identifier];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:identifier];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     
     return result;
 }
@@ -163,6 +164,25 @@
     return [[self class] serviceIdentifier];
 }
 
+- (UIViewController * )activityViewController;
+{
+    if ([[self class] username] &&
+        [[[self class] username] isEqualToString:@""] == NO)
+    {
+        return nil;
+    }
+    
+    NXReadLaterLoginViewController *loginController  = [[NXReadLaterLoginViewController alloc] initWithActivity:self resultHandler:^(NXReadLaterLoginViewController *controller, BOOL success) {
+        if (success) {
+            [self performActivity];
+        } else {
+            for (id item in self.activityItems) {
+                [self activityDidFinish:NO withItem:item];
+            }
+        }
+    }];
+    return [[UINavigationController alloc] initWithRootViewController:loginController];
+}
 
 - (UIImage *)activityImage;
 {
@@ -211,8 +231,9 @@
     
     UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:mainWindow animated:YES];
-    hud.labelText = @"Saving…";
+    self.hud = [MBProgressHUD showHUDAddedTo:mainWindow animated:YES];
+    self.hud.labelText = @"Saving…";
+    self.hud.animationType = MBProgressHUDAnimationZoom;
     
     if (username) {
         for (NSURL *shareURL in self.activityItems) {
@@ -224,6 +245,14 @@
                                                    queue:[NSOperationQueue mainQueue]
                                        completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                            BOOL success = NO;
+                                           
+                                           if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                                               NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                               
+                                               if (httpResponse.statusCode == 200 || httpResponse.statusCode == 201) {
+                                                   success = YES;
+                                               }
+                                           }
                                            
                                            [self activityDidFinish:success withItem:shareURL];
                                        }];
@@ -246,13 +275,12 @@
     }
     
     if (self.activityItems.count == 0) {
-        int64_t delayInSeconds = 0.3;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-            [MBProgressHUD hideAllHUDsForView:mainWindow animated:YES];
-        });
-        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.hud.mode = MBProgressHUDModeText;
+            self.hud.labelText = completed ? @"Done" : @"Failed";
+            
+            [self.hud hide:YES afterDelay:0.75];
+        }];
         
         [self activityDidFinish:completed];
     }
