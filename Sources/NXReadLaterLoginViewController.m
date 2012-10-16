@@ -9,25 +9,26 @@
 #import "NXTextInputCell.h"
 #import "NXInstapaperActivity.h"
 
-#import "NXInstapaperLoginViewController.h"
+#import "NXReadLaterLoginViewController.h"
 
-NSString * const NXInstapaperLoginViewControllerInputCellIdentifier = @"InputCell";
+NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell";
 
 
-@interface NXInstapaperLoginViewController () <UITextFieldDelegate>
+@interface NXReadLaterLoginViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong, readonly) UITextField *usernameField;
 @property (nonatomic, strong, readonly) UITextField *passwordField;
 
 @end
 
-@implementation NXInstapaperLoginViewController
+@implementation NXReadLaterLoginViewController
 
-- (id)initWithResultHandler:(NXInstapaperLoginViewControllerResultHandler)handler;
+- (id)initWithActivity:(NXReadLaterActivity *)activity resultHandler:(NXReadLaterLoginViewControllerResultHandler)handler;
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         _handler = [handler copy];
+        _activity = activity;
     }
     
     return self;
@@ -38,9 +39,9 @@ NSString * const NXInstapaperLoginViewControllerInputCellIdentifier = @"InputCel
     [super viewDidLoad];
     
     [self.tableView registerClass:[NXTextInputCell class]
-           forCellReuseIdentifier:NXInstapaperLoginViewControllerInputCellIdentifier];
+           forCellReuseIdentifier:NXReadLaterLoginViewControllerInputCellIdentifier];
     
-    self.navigationItem.title = @"Instapaper";
+    self.navigationItem.title = self.activity.activityTitle;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login"
                                                                               style:UIBarButtonItemStyleDone
                                                                              target:self
@@ -54,7 +55,7 @@ NSString * const NXInstapaperLoginViewControllerInputCellIdentifier = @"InputCel
 {
     [super viewDidAppear:animated];
     
-    self.usernameField.text = [NXInstapaperActivity username];
+    self.usernameField.text = [[self.activity class] username];
     [self.usernameField becomeFirstResponder];
 }
 
@@ -89,7 +90,7 @@ NSString * const NXInstapaperLoginViewControllerInputCellIdentifier = @"InputCel
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    NXTextInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NXInstapaperLoginViewControllerInputCellIdentifier
+    NXTextInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NXReadLaterLoginViewControllerInputCellIdentifier
                                                             forIndexPath:indexPath];
     
     cell.inputField.delegate = self;
@@ -143,11 +144,7 @@ NSString * const NXInstapaperLoginViewControllerInputCellIdentifier = @"InputCel
     if ([self fieldsValid]) {
         NSLog(@"login with %@ pass %@", self.usernameField.text, self.passwordField.text);
      
-        NSString *urlString = [NSString stringWithFormat:@"https://www.instapaper.com/api/authenticate?username=%@&password=%@",
-                               [self.usernameField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                               [self.passwordField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+        NSURLRequest *request = [self.activity loginRequestWithUsername:self.usernameField.text password:self.passwordField.text];
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [NSURLConnection sendAsynchronousRequest:request
@@ -157,20 +154,20 @@ NSString * const NXInstapaperLoginViewControllerInputCellIdentifier = @"InputCel
                                            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
                                            if (httpResponse.statusCode == 200) {
                                                
-                                               [NXInstapaperActivity storeAccountWithUsername:self.usernameField.text
-                                                                                     password:self.passwordField.text];
+                                               [[self.activity class] storeAccountWithUsername:self.usernameField.text
+                                                                                      password:self.passwordField.text];
                                                
                                                if (_handler) _handler(self, YES);
                                                
                                                return;
                                            } else {
-                                               NSLog(@"Instapaper Login failed with HTTP Status %d", httpResponse.statusCode);
+                                               NSLog(@"Readlater login for activity %@ failed with HTTP Status %d", self.activity, httpResponse.statusCode);
                                            }
                                        }
                                        
-                                       NSLog(@"Instapaper Login failed with error %@", error);
+                                       NSLog(@"Readlater login for activity %@  failed with error %@", self.activity, error);
                                        
-                                       [NXInstapaperActivity removeAccount];
+                                       [[self.activity class] removeAccount];
                                        
                                        if (_handler) _handler(self, NO);
                                    }];

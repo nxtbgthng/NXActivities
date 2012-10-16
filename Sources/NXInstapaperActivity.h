@@ -6,18 +6,13 @@
 //  Copyright (c) 2012 nxtbgthng. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "NXReadLaterActivity.h"
 
-extern NSString * const NXInstapaperAccountUsernameDefaultsKey;
-extern NSString * const NXInstapaperKeychainServiceIdentifier;
+extern NSString * const NXInstapaperServiceIdentifier;
 
 
-@interface NXInstapaperActivity : UIActivity
+@interface NXInstapaperActivity : NXReadLaterActivity
 
-+ (NSString *)username;
-+ (NSString *)password;
 
-+ (BOOL)storeAccountWithUsername:(NSString *)username password:(NSString *)password;
-+ (BOOL)removeAccount;
 
 @end
