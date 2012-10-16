@@ -12,10 +12,9 @@ Pod::Spec.new do |s|
   s.dependency 'MBProgressHUD', '0.5'
   
   s.source   = { :git => 'https://github.com/nxtbgthng/NXActivities.git', :tag => '0.1' }
-  s.source_files = 'NXReadLaterActivity.{h,m}',
-                   'NXPocketActivity.{h,m}',
-                   'NXInstapaperActivity.{h,m}',
-                   'NXReadLaterTextInputCell.{h,m}',
-                   'NSBundle+NXActivities.{h,m}',
-                   'NXReadLaterLoginViewController.{h,m}'
+  s.source_files = 'Sources/*.{h,m}'
+  
+  s.requires_arc = true
+  s.framework    = "CoreGraphics"
+  s.framework    = "Security"
 end
