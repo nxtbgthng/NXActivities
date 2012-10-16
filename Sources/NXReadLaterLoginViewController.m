@@ -146,8 +146,11 @@ NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell
 - (void)login:(id)sender;
 {
     if ([self fieldsValid]) {
-        NSLog(@"login with %@ pass %@", self.usernameField.text, self.passwordField.text);
-     
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+        self.navigationItem.leftBarButtonItem.enabled = NO;
+        self.passwordField.enabled = NO;
+        self.usernameField.enabled = NO;
+        
         [self.passwordField resignFirstResponder];
         [self.usernameField resignFirstResponder];
         
@@ -157,6 +160,11 @@ NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell
             [NSURLConnection sendAsynchronousRequest:request
                                                queue:[NSOperationQueue mainQueue]
                                    completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                       self.navigationItem.rightBarButtonItem.enabled = YES;
+                                       self.navigationItem.leftBarButtonItem.enabled = YES;
+                                       self.passwordField.enabled = YES;
+                                       self.usernameField.enabled = YES;
+                                       
                                        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                                            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
                                            if (httpResponse.statusCode == 200) {
@@ -194,7 +202,10 @@ NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell
 
 - (BOOL)fieldsValid;
 {
-    return [self.usernameField.text isEqual:@""] == NO && [self.passwordField.text isEqual:@""] == NO;
+    return self.usernameField.text != nil &&
+           [self.usernameField.text isEqual:@""] == NO &&
+            self.passwordField.text != nil &&
+           [self.passwordField.text isEqual:@""] == NO;
 }
 
 

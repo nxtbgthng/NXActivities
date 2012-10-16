@@ -53,21 +53,25 @@ NSString * const NXPocketServiceIdentifier = @"Pocket";
 
 - (NSURLRequest *)readLaterRequest:(NSURL *)shareURL;
 {
+    NSString *username = [[self class] username];
+    NSString *password = [[self class] password];
+    username = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)username, NULL, CFSTR("￼=,!$&'()*+;@?\n\"<>#\t :/"), kCFStringEncodingUTF8);
+    password = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)password, NULL, CFSTR("￼=,!$&'()*+;@?\n\"<>#\t :/"), kCFStringEncodingUTF8);
+    NSString *encodedURL = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)shareURL.absoluteString, NULL, CFSTR("￼=,!$&'()*+;@?\n\"<>#\t :/"), kCFStringEncodingUTF8);
+    
     NSString *urlString = [NSString stringWithFormat:@"https://readitlaterlist.com/v2/add?username=%@&password=%@&url=%@&apikey=%@",
-                           [[[self class] username] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           [[[self class] password] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           [shareURL.absoluteString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           [[self class] pocketAPIKey]];
+                           username, password, encodedURL, [[self class] pocketAPIKey]];
     return [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     
 }
 
 - (NSURLRequest *)loginRequestWithUsername:(NSString *)username password:(NSString *)password;
 {
+    username = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)username, NULL, CFSTR("￼=,!$&'()*+;@?\n\"<>#\t :/"), kCFStringEncodingUTF8);
+    password = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)password, NULL, CFSTR("￼=,!$&'()*+;@?\n\"<>#\t :/"), kCFStringEncodingUTF8);
+    
     NSString *urlString = [NSString stringWithFormat:@"https://readitlaterlist.com/v2/auth?username=%@&password=%@&apikey=%@",
-                           [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           [password stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           [[self class] pocketAPIKey]];
+                           username, password, [[self class] pocketAPIKey]];
     return [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
 }
 
