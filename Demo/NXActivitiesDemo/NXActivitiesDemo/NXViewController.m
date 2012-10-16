@@ -68,8 +68,8 @@
 
 - (void)updateButtons;
 {
-    self.instapaperLogOutButton.enabled = [NXInstapaperActivity username] != nil;
-    self.pocketLogOutButton.enabled = [NXPocketActivity username] != nil;
+    self.instapaperLogOutButton.enabled = [NXInstapaperActivity hasAccount];
+    self.pocketLogOutButton.enabled = [NXPocketActivity hasAccount];
 }
 
 @end
