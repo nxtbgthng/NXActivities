@@ -1,5 +1,6 @@
 Pod::Spec.new do |s|
   s.platform = :ios, '6.0'
+  s.ios.deployment_target = '5.0'
   s.name     = 'NXActivities'
   
   s.version  = '0.1'
