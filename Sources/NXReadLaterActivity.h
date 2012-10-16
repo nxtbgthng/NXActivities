@@ -13,6 +13,7 @@
 + (NSString *)username;
 + (NSString *)password;
 
++ (BOOL)hasAccount;
 + (BOOL)storeAccountWithUsername:(NSString *)username password:(NSString *)password;
 + (BOOL)removeAccount;
 

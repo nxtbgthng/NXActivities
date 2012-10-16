@@ -156,6 +156,11 @@
     return [self removeAccountForServiceIdentifier:[self serviceIdentifier]];
 }
 
++ (BOOL)hasAccount;
+{
+    return [self usernameForServiceIdentifier:[self serviceIdentifier]] != nil &&
+           [[self usernameForServiceIdentifier:[self serviceIdentifier]] isEqualToString:@""] == NO;
+}
 
 #pragma mark UIActivity
 
