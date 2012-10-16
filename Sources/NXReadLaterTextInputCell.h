@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NXTextInputCell : UITableViewCell
+@interface NXReadLaterTextInputCell : UITableViewCell
 
 @property (nonatomic, strong, readwrite) IBOutlet UITextField *inputField;
 @property (nonatomic, strong, readwrite) id context;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 nxtbgthng. All rights reserved.
 //
 
-#import "NXTextInputCell.h"
+#import "NXReadLaterTextInputCell.h"
 
-@implementation NXTextInputCell
+@implementation NXReadLaterTextInputCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

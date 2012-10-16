@@ -26,7 +26,7 @@
 		991397C116287EB20031116B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 991397C016287EB20031116B /* QuartzCore.framework */; };
 		9981D08316284A26005DE8C9 /* NSBundle+NXActivities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9981D08216284A26005DE8C9 /* NSBundle+NXActivities.m */; };
 		9981D08716284BF0005DE8C9 /* NXReadLaterLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9981D08616284BF0005DE8C9 /* NXReadLaterLoginViewController.m */; };
-		9981D08A16284D01005DE8C9 /* NXTextInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9981D08916284D01005DE8C9 /* NXTextInputCell.m */; };
+		9981D08A16284D01005DE8C9 /* NXReadLaterTextInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9981D08916284D01005DE8C9 /* NXReadLaterTextInputCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,8 +78,8 @@
 		9981D08216284A26005DE8C9 /* NSBundle+NXActivities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+NXActivities.m"; sourceTree = "<group>"; };
 		9981D08516284BF0005DE8C9 /* NXReadLaterLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXReadLaterLoginViewController.h; sourceTree = "<group>"; };
 		9981D08616284BF0005DE8C9 /* NXReadLaterLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXReadLaterLoginViewController.m; sourceTree = "<group>"; };
-		9981D08816284D01005DE8C9 /* NXTextInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXTextInputCell.h; sourceTree = "<group>"; };
-		9981D08916284D01005DE8C9 /* NXTextInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXTextInputCell.m; sourceTree = "<group>"; };
+		9981D08816284D01005DE8C9 /* NXReadLaterTextInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXReadLaterTextInputCell.h; sourceTree = "<group>"; };
+		9981D08916284D01005DE8C9 /* NXReadLaterTextInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXReadLaterTextInputCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,8 +161,8 @@
 				9981D08616284BF0005DE8C9 /* NXReadLaterLoginViewController.m */,
 				9981D08116284A26005DE8C9 /* NSBundle+NXActivities.h */,
 				9981D08216284A26005DE8C9 /* NSBundle+NXActivities.m */,
-				9981D08816284D01005DE8C9 /* NXTextInputCell.h */,
-				9981D08916284D01005DE8C9 /* NXTextInputCell.m */,
+				9981D08816284D01005DE8C9 /* NXReadLaterTextInputCell.h */,
+				9981D08916284D01005DE8C9 /* NXReadLaterTextInputCell.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -318,7 +318,7 @@
 				9907A4C0162813CC008AC656 /* NXInstapaperActivity.m in Sources */,
 				9981D08316284A26005DE8C9 /* NSBundle+NXActivities.m in Sources */,
 				9981D08716284BF0005DE8C9 /* NXReadLaterLoginViewController.m in Sources */,
-				9981D08A16284D01005DE8C9 /* NXTextInputCell.m in Sources */,
+				9981D08A16284D01005DE8C9 /* NXReadLaterTextInputCell.m in Sources */,
 				990E9714162D5A45006F865E /* NXReadLaterActivity.m in Sources */,
 				99101B61162D901000420C38 /* NXPocketActivity.m in Sources */,
 			);

@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 nxtbgthng. All rights reserved.
 //
 
-#import "NXTextInputCell.h"
+#import "NXReadLaterTextInputCell.h"
 #import "NXInstapaperActivity.h"
 
 #import "NXReadLaterLoginViewController.h"
@@ -38,7 +38,7 @@ NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell
 {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[NXTextInputCell class]
+    [self.tableView registerClass:[NXReadLaterTextInputCell class]
            forCellReuseIdentifier:NXReadLaterLoginViewControllerInputCellIdentifier];
     
     self.navigationItem.title = self.activity.activityTitle;
@@ -63,13 +63,13 @@ NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell
 
 - (UITextField *)usernameField;
 {
-    NXTextInputCell *cell =  (NXTextInputCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    NXReadLaterTextInputCell *cell =  (NXReadLaterTextInputCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     return cell.inputField;
 }
 
 - (UITextField *)passwordField;
 {
-    NXTextInputCell *cell =  (NXTextInputCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    NXReadLaterTextInputCell *cell =  (NXReadLaterTextInputCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     return cell.inputField;    
 }
 
@@ -90,7 +90,7 @@ NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    NXTextInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NXReadLaterLoginViewControllerInputCellIdentifier
+    NXReadLaterTextInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NXReadLaterLoginViewControllerInputCellIdentifier
                                                             forIndexPath:indexPath];
     
     cell.inputField.delegate = self;
