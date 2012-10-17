@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
   
   s.source   = { :git => 'https://github.com/nxtbgthng/NXActivities.git', :tag => '0.1' }
   s.source_files = 'Sources/*.{h,m}'
+  s.resources = 'Resources/NXActivities.bundle'
   
   s.requires_arc = true
   s.framework    = "CoreGraphics"
