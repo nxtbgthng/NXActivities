@@ -151,18 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				9907A49416281338008AC656 /* Supporting Files */,
-				9907A4BE162813CC008AC656 /* NXInstapaperActivity.h */,
-				9907A4BF162813CC008AC656 /* NXInstapaperActivity.m */,
-				99101B5F162D901000420C38 /* NXPocketActivity.h */,
-				99101B60162D901000420C38 /* NXPocketActivity.m */,
-				990E9712162D5A45006F865E /* NXReadLaterActivity.h */,
-				990E9713162D5A45006F865E /* NXReadLaterActivity.m */,
-				9981D08516284BF0005DE8C9 /* NXReadLaterLoginViewController.h */,
-				9981D08616284BF0005DE8C9 /* NXReadLaterLoginViewController.m */,
-				9981D08116284A26005DE8C9 /* NSBundle+NXActivities.h */,
-				9981D08216284A26005DE8C9 /* NSBundle+NXActivities.m */,
-				9981D08816284D01005DE8C9 /* NXReadLaterTextInputCell.h */,
-				9981D08916284D01005DE8C9 /* NXReadLaterTextInputCell.m */,
+				999EAC9E162E976400FAE22B /* Activities */,
+				999EACA0162E977200FAE22B /* UI */,
+				999EACA1162E977800FAE22B /* Additions */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -200,6 +191,39 @@
 				9907A4C4162814DB008AC656 /* NXActivities.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		999EAC9E162E976400FAE22B /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				9907A4BE162813CC008AC656 /* NXInstapaperActivity.h */,
+				9907A4BF162813CC008AC656 /* NXInstapaperActivity.m */,
+				99101B5F162D901000420C38 /* NXPocketActivity.h */,
+				99101B60162D901000420C38 /* NXPocketActivity.m */,
+				990E9712162D5A45006F865E /* NXReadLaterActivity.h */,
+				990E9713162D5A45006F865E /* NXReadLaterActivity.m */,
+			);
+			name = Activities;
+			sourceTree = "<group>";
+		};
+		999EACA0162E977200FAE22B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9981D08516284BF0005DE8C9 /* NXReadLaterLoginViewController.h */,
+				9981D08616284BF0005DE8C9 /* NXReadLaterLoginViewController.m */,
+				9981D08816284D01005DE8C9 /* NXReadLaterTextInputCell.h */,
+				9981D08916284D01005DE8C9 /* NXReadLaterTextInputCell.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		999EACA1162E977800FAE22B /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				9981D08116284A26005DE8C9 /* NSBundle+NXActivities.h */,
+				9981D08216284A26005DE8C9 /* NSBundle+NXActivities.m */,
+			);
+			name = Additions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
