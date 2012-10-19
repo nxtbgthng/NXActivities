@@ -23,6 +23,7 @@
 @property (nonatomic, strong, readwrite) MBProgressHUD *hud;
 @property (nonatomic, strong, readwrite) NSArray *activityItems;
 @property (nonatomic, strong, readwrite) NXReadLaterLoginViewController *loginController;
+@property (nonatomic, strong, readwrite) UINavigationController *navigationController;
 
 @end
 
@@ -195,7 +196,11 @@
 {
     if ([[self class] hasAccount]) return nil;
 
-    return [[UINavigationController alloc] initWithRootViewController:self.loginController];
+    if (!self.navigationController) {
+        self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.loginController];
+    }
+    
+    return self.navigationController;
 }
 
 - (UIImage *)activityImage;

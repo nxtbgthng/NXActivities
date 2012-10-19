@@ -21,8 +21,8 @@
 {
     [super viewDidLoad];
 
-#error Insert your Pocket API Key here and remove this directive
-    [NXPocketActivity setPocketAPIKey:nil];
+//#error Insert your Pocket API Key here and remove this directive
+//    [NXPocketActivity setPocketAPIKey:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated;
@@ -37,10 +37,13 @@
     NXInstapaperActivity *instapaperActivity = [[NXInstapaperActivity alloc] init];
     NXPocketActivity *pocketActivity = [[NXPocketActivity alloc] init];
     
+    UINavigationController *navController = (UINavigationController *)instapaperActivity.activityViewController;
+    navController.navigationBar.tintColor = [UIColor lightGrayColor];
+    
     NSURL *url = [NSURL URLWithString:self.URLField.text];
     if (url) {
         UIActivityViewController *shareController = [[UIActivityViewController alloc] initWithActivityItems:@[ url ]
-                                                                                      applicationActivities:@[ instapaperActivity, pocketActivity ]];
+                                                                                      applicationActivities:@[ instapaperActivity,pocketActivity ]];
         [self presentViewController:shareController animated:YES completion:NULL];
         shareController.completionHandler = ^(NSString *type, BOOL completed) {
             [self updateButtons];
