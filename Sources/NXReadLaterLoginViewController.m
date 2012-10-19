@@ -29,6 +29,7 @@ NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell
     if (self) {
         _handler = [handler copy];
         _activity = activity;
+        self.modalPresentationStyle = UIModalPresentationFormSheet;
     }
     
     return self;
