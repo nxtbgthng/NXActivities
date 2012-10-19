@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class NXReadLaterLoginViewController;
+
+
 @interface NXReadLaterActivity : UIActivity
 
 + (NSString *)username;
@@ -17,10 +20,15 @@
 + (BOOL)storeAccountWithUsername:(NSString *)username password:(NSString *)password;
 + (BOOL)removeAccount;
 
-// Subclasses have to override the following merhods
+// This view controller is shown, if login is required.
+// The controller shown is in a UINaviationController
+@property (nonatomic, strong, readonly) NXReadLaterLoginViewController *loginController;
+
+// Subclasses have to override the following methods
 + (NSString *)serviceIdentifier;
 - (NSURLRequest *)loginRequestWithUsername:(NSString *)username password:(NSString *)password;
 - (NSURLRequest *)readLaterRequest:(NSURL *)shareURL;
+
 
 
 @end

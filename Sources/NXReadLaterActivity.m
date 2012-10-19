@@ -22,6 +22,7 @@
 
 @property (nonatomic, strong, readwrite) MBProgressHUD *hud;
 @property (nonatomic, strong, readwrite) NSArray *activityItems;
+@property (nonatomic, strong, readwrite) NXReadLaterLoginViewController *loginController;
 
 @end
 
@@ -162,6 +163,27 @@
            [[self usernameForServiceIdentifier:[self serviceIdentifier]] isEqualToString:@""] == NO;
 }
 
+
+#pragma mark Accessors
+
+- (NXReadLaterLoginViewController *)loginController;
+{
+    if (!_loginController) {
+        _loginController  = [[NXReadLaterLoginViewController alloc] initWithActivity:self resultHandler:^(NXReadLaterLoginViewController *controller, BOOL success) {
+            if (success) {
+                [self performActivity];
+            } else {
+                for (id item in self.activityItems) {
+                    [self activityDidFinish:NO withItem:item];
+                }
+            }
+        }];
+    }
+    
+    return _loginController;
+}
+
+
 #pragma mark UIActivity
 
 - (NSString *)activityType;
@@ -171,22 +193,9 @@
 
 - (UIViewController * )activityViewController;
 {
-    if ([[self class] username] &&
-        [[[self class] username] isEqualToString:@""] == NO)
-    {
-        return nil;
-    }
-    
-    NXReadLaterLoginViewController *loginController  = [[NXReadLaterLoginViewController alloc] initWithActivity:self resultHandler:^(NXReadLaterLoginViewController *controller, BOOL success) {
-        if (success) {
-            [self performActivity];
-        } else {
-            for (id item in self.activityItems) {
-                [self activityDidFinish:NO withItem:item];
-            }
-        }
-    }];
-    return [[UINavigationController alloc] initWithRootViewController:loginController];
+    if ([[self class] hasAccount]) return nil;
+
+    return [[UINavigationController alloc] initWithRootViewController:self.loginController];
 }
 
 - (UIImage *)activityImage;
