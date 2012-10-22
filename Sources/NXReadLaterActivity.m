@@ -205,26 +205,16 @@
 
 - (UIImage *)activityImage;
 {
-    NSBundle *bundle  = [NSBundle nxactivitiesBundle];
-    
-    NSString *resoutionMultiplier = @"";
-    if ([[UIScreen mainScreen] scale] == 2.0) {
-        resoutionMultiplier = @"@2x";
-    }
-    
     NSString *imageName;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        imageName = [NSString stringWithFormat:@"%@-ipad%@", [[self class] serviceIdentifier], resoutionMultiplier];
+        imageName = [NSString stringWithFormat:@"%@-ipad", [[self class] serviceIdentifier]];
     } else {
-        imageName = [NSString stringWithFormat:@"%@-iphone%@", [[self class] serviceIdentifier], resoutionMultiplier];
+        imageName = [NSString stringWithFormat:@"%@-iphone", [[self class] serviceIdentifier]];
     }
     
-    NSString *path = [bundle pathForResource:imageName ofType:@"png"];
-    
-    return [UIImage imageWithContentsOfFile:path];
+    return [self bundleImageNamed:imageName];
 }
-
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems;
 {
@@ -295,7 +285,10 @@
     
     if (self.activityItems.count == 0) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            self.hud.mode = MBProgressHUDModeText;
+            self.hud.mode = MBProgressHUDModeCustomView;
+            UIImage *image = completed ? [self bundleImageNamed:@"success"] : [self bundleImageNamed:@"fail"];
+            
+            self.hud.customView = [[UIImageView alloc] initWithImage:image];
             self.hud.labelText = completed ? @"Done" : @"Failed";
             
             [self.hud hide:YES afterDelay:0.75];
@@ -317,6 +310,33 @@
 {
     NSAssert(NO, @"Subclasses must provide a -readLaterRequest impelmentation");
     return nil;
+}
+
+
+#pragma mark Private
+
+- (UIImage *)bundleImageNamed:(NSString *)name;
+{
+    NSParameterAssert(name);
+    
+    NSBundle *bundle  = [NSBundle nxactivitiesBundle];
+    
+    NSString *resoutionMultiplier = @"";
+    if ([[UIScreen mainScreen] scale] == 2.0) {
+        resoutionMultiplier = @"@2x";
+    }
+    
+    NSString *imageName;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        imageName = [NSString stringWithFormat:@"%@%@", name, resoutionMultiplier];
+    } else {
+        imageName = [NSString stringWithFormat:@"%@%@", name, resoutionMultiplier];
+    }
+    
+    NSString *path = [bundle pathForResource:imageName ofType:@"png"];
+    
+    return [UIImage imageWithContentsOfFile:path];
 }
 
 @end
