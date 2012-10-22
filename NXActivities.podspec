@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '5.0'
   s.name     = 'NXActivities'
   
-  s.version  = '0.2'
+  s.version  = '0.2.1'
   s.license  = 'BSD'
   
   s.summary  = 'Provides ready to use UIActivity implementations for popular webservices. Currentlyn supports Instapaper and Pocket.'
