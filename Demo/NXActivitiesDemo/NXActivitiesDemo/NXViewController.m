@@ -22,7 +22,7 @@
     [super viewDidLoad];
 
 //#error Insert your Pocket API Key here and remove this directive
-//    [NXPocketActivity setPocketAPIKey:nil];
+    [NXPocketActivity setPocketAPIKey:@"foobar"];
 }
 
 - (void)viewDidAppear:(BOOL)animated;
