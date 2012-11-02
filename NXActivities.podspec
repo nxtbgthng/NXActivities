@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   
   s.dependency 'MBProgressHUD', '0.5'
   
-  s.source   = { :git => 'https://github.com/nxtbgthng/NXActivities.git', :tag => '0.1' }
+  s.source   = { :git => 'https://github.com/nxtbgthng/NXActivities.git', :tag => 'v0.2.1' }
   s.source_files = 'Sources/*.{h,m}'
   s.resources = 'Resources/NXActivities.bundle'
   
