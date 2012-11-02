@@ -4,7 +4,7 @@ The best way to use this is [CocoaPods](https://github.com/CocoaPods).
 
 Just add
 
-    dependency 'NXActivities'
+    pod 'NXActivities'
 
 to you `Podfile`.
 
