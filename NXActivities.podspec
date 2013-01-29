@@ -3,16 +3,16 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '5.0'
   s.name     = 'NXActivities'
   
-  s.version  = '0.2.1'
+  s.version  = '0.2.3'
   s.license  = 'BSD'
   
-  s.summary  = 'Provides ready to use UIActivity implementations for popular webservices. Currentlyn supports Instapaper and Pocket.'
+  s.summary  = 'Provides ready to use UIActivity implementations with login UI for popular webservices. Currently it supports Instapaper and Pocket.'
   s.homepage = 'https://github.com/nxtbgthng/NXActivities'
   s.author   = { 'Thomas Kollbach' => 'toto@nxtbgthng.com' }
   
   s.dependency 'MBProgressHUD', '0.5'
   
-  s.source   = { :git => 'https://github.com/nxtbgthng/NXActivities.git', :tag => '0.1' }
+  s.source   = { :git => 'https://github.com/nxtbgthng/NXActivities.git', :tag => s.version }
   s.source_files = 'Sources/*.{h,m}'
   s.resources = 'Resources/NXActivities.bundle'
   
