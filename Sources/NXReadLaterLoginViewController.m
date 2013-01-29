@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 nxtbgthng. All rights reserved.
 //
 
+#import "NSBundle+NXActivities.h"
+
 #import "NXReadLaterTextInputCell.h"
 #import "NXInstapaperActivity.h"
 
@@ -43,7 +45,9 @@ NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell
            forCellReuseIdentifier:NXReadLaterLoginViewControllerInputCellIdentifier];
     
     self.navigationItem.title = self.activity.activityTitle;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login"
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[[NSBundle nxactivitiesBundle] localizedStringForKey:@"keyLoginButton"
+                                                                                                                                   value:@"Login"
+                                                                                                                                   table:nil]
                                                                               style:UIBarButtonItemStyleDone
                                                                              target:self
                                                                              action:@selector(login:)];
@@ -97,14 +101,18 @@ NSString * const NXReadLaterLoginViewControllerInputCellIdentifier = @"InputCell
     cell.inputField.delegate = self;
     
     if (indexPath.row == 0) {
-        cell.inputField.placeholder = @"Email or Username";
+        cell.inputField.placeholder = [[NSBundle nxactivitiesBundle] localizedStringForKey:@"keyEmailOrUsernamePlaceholder"
+                                                                                     value:@"Email or Username"
+                                                                                     table:nil];
         cell.inputField.secureTextEntry = NO;
         cell.inputField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         cell.inputField.keyboardType = UIKeyboardTypeEmailAddress;
         cell.inputField.returnKeyType = UIReturnKeyNext;
         cell.inputField.enablesReturnKeyAutomatically = YES;
     } else {
-        cell.inputField.placeholder = @"Password";
+        cell.inputField.placeholder = [[NSBundle nxactivitiesBundle] localizedStringForKey:@"keyPasswordPlaceholder"
+                                                                                     value:@"Password"
+                                                                                     table:nil];
         cell.inputField.secureTextEntry = YES;
         cell.inputField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         cell.inputField.keyboardType = UIKeyboardTypeDefault;

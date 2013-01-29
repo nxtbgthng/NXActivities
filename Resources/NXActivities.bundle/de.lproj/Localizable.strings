@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  NXActivities
+
+  Created by Thomas Kollbach on 29.01.13.
+  Copyright (c) 2013 nxtbgthng. All rights reserved.
+*/
+"keyEmailOrUsernamePlaceholder" = "E-Mail oder Benutzername";
+"keyPasswordPlaceholder" = "Passwort";
+"keyLoginButton" = "Anmelden";
+"keyBezelDone" = "Erfolgreich";
+"keyBezelFailed" = "Fehlgeschlagen";

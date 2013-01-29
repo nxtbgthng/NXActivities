@@ -289,7 +289,15 @@
             UIImage *image = completed ? [self bundleImageNamed:@"success"] : [self bundleImageNamed:@"fail"];
             
             self.hud.customView = [[UIImageView alloc] initWithImage:image];
-            self.hud.labelText = completed ? @"Done" : @"Failed";
+            if (completed) {
+                self.hud.labelText = [[NSBundle nxactivitiesBundle] localizedStringForKey:@"keyBezelDone"
+                                                                                    value:@"Done"
+                                                                                    table:nil];
+            } else {
+                self.hud.labelText = [[NSBundle nxactivitiesBundle] localizedStringForKey:@"keyBezelFailed"
+                                                                                    value:@"Failed"
+                                                                                    table:nil];
+            }
             
             [self.hud hide:YES afterDelay:0.75];
         }];

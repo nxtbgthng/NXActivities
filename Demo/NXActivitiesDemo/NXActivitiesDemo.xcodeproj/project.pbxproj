@@ -41,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		99064BA816B821040007CA97 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = de; path = de.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		99064BA916B821040007CA97 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		99064BAA16B821040007CA97 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9907A4D616282AB9008AC656 /* NXActivitiesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXActivitiesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9907A4DA16282AB9008AC656 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9907A4DC16282AB9008AC656 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -242,6 +245,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
 			);
 			mainGroup = 9907A4CB16282AB9008AC656;
 			productRefGroup = 9907A4D716282AB9008AC656 /* Products */;
@@ -328,6 +332,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9907A4E416282AB9008AC656 /* en */,
+				99064BA916B821040007CA97 /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9907A4F316282AB9008AC656 /* en */,
+				99064BA816B821040007CA97 /* de */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -344,6 +350,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9907A50816282AB9008AC656 /* en */,
+				99064BAA16B821040007CA97 /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
