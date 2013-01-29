@@ -3,10 +3,10 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '5.0'
   s.name     = 'NXActivities'
   
-  s.version  = '0.2.2'
+  s.version  = '0.2.3'
   s.license  = 'BSD'
   
-  s.summary  = 'Provides ready to use UIActivity implementations for popular webservices. Currentlyn supports Instapaper and Pocket.'
+  s.summary  = 'Provides ready to use UIActivity implementations with login UI for popular webservices. Currently it supports Instapaper and Pocket.'
   s.homepage = 'https://github.com/nxtbgthng/NXActivities'
   s.author   = { 'Thomas Kollbach' => 'toto@nxtbgthng.com' }
   
